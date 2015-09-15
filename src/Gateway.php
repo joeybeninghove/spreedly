@@ -37,6 +37,23 @@ class Gateway {
 	}
 
 	/**
+	 * Get a single gateway based on the token
+	 *
+	 * <code>
+	 *		Spreedly::gateway($gatewayToken)->get();
+	 * </code>
+	 *
+	 * @return \Tuurbo\Spreedly\Client
+	 */
+	public function get()
+	{
+		if (! $this->gatewayToken)
+			throw new Exceptions\MissingGatewayTokenException;
+
+		return $this->client->request('https://core.spreedly.com/v1/gateways/'.$this->gatewayToken.'.xml');
+	}
+
+	/**
 	 * Get a list of all gateways you've created on Spreedly.
 	 *
 	 * <code>

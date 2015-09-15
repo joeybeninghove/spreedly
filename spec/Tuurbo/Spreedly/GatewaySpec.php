@@ -104,4 +104,13 @@ class GatewaySpec extends ObjectBehavior {
 		$this->payment()->shouldReturnAnInstanceOf('Tuurbo\Spreedly\Payment');
 	}
 
+	function it_requests_single_gateway($client)
+	{
+		$client->request('https://core.spreedly.com/v1/gateways/'.self::GATEWAY_TOKEN.'.xml')
+			->shouldBeCalled()
+			->willReturn($client);
+
+		$this->get()->shouldReturnAnInstanceOf('Tuurbo\Spreedly\Client');
+	}
+
 }
